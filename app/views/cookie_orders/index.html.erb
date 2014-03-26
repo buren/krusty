@@ -1,0 +1,31 @@
+<h1>Listing cookie_orders</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cookie</th>
+      <th>Order</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cookie_orders.each do |cookie_order| %>
+      <tr>
+        <td><%= cookie_order.cookie_id %></td>
+        <td><%= cookie_order.order_id %></td>
+        <td><%= cookie_order.amount %></td>
+        <td><%= link_to 'Show', cookie_order %></td>
+        <td><%= link_to 'Edit', edit_cookie_order_path(cookie_order) %></td>
+        <td><%= link_to 'Destroy', cookie_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cookie order', new_cookie_order_path %>

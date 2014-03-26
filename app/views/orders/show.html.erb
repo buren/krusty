@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Requested delivery date:</strong>
+  <%= @order.requested_delivery_date %>
+</p>
+
+<p>
+  <strong>Delivered date:</strong>
+  <%= @order.delivered_date %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

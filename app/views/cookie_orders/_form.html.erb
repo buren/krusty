@@ -1,0 +1,29 @@
+<%= form_for(@cookie_order) do |f| %>
+  <% if @cookie_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cookie_order.errors.count, "error") %> prohibited this cookie_order from being saved:</h2>
+
+      <ul>
+      <% @cookie_order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cookie_id %><br>
+    <%= f.number_field :cookie_id %>
+  </div>
+  <div class="field">
+    <%= f.label :order_id %><br>
+    <%= f.number_field :order_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

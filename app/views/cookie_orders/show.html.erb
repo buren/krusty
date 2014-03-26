@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cookie:</strong>
+  <%= @cookie_order.cookie_id %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @cookie_order.order_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @cookie_order.amount %>
+</p>
+
+<%= link_to 'Edit', edit_cookie_order_path(@cookie_order) %> |
+<%= link_to 'Back', cookie_orders_path %>

@@ -1,0 +1,106 @@
+@import "colors";
+@import "mixins";
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.lead {
+  text-align: justify;
+}
+
+ul.nav.navbar-nav {
+  li {
+    font-size: 16px;
+  }
+}
+
+.navbar-brand {
+  font-size: 22px;
+}
+
+
+.navbar-default .navbar-nav > li > a {
+  color: $teal;
+}
+
+
+.error {
+  margin-top: 5px;
+  color: #d9534f;
+}
+
+#signup-thank-you {
+  display: none;
+}
+
+.center-content {
+  @extend %absolute-center;
+}
+
+.social-links {
+  a {
+    color: #101010;
+    &:hover {
+      color: lighten(#101010, 20%);
+    }
+  }
+}
+
+.parallax-wrapper {
+  .jumbo-header {
+    font-size: 3.5em;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+.section-heading-spacer.spacer-white {
+  border-color: transparent;
+}
+
+.two-column-section {
+}
+
+.advantage-list {
+  font-size: 18px;
+  font-weight: 400;
+  .adv-list {
+    min-height: 60px;
+  }
+}
+
+.contact-us-content {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+.contact-card {
+  max-width: 320px;
+}
+
+.panel-heading {
+ font-size: 20px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.section-side-image {
+  margin-top: 30px;
+}
+
+#contact-us-main-title {
+ font-size: 36px;
+}
+
+.circle.proccess-flow-circle {
+  margin-top: 20px;
+}

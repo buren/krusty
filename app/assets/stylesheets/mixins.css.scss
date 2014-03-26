@@ -1,0 +1,17 @@
+%absolute-center {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@mixin parallax-section($backgroundImage, $height: 100%) {
+  display: table;
+  height: $height;
+  width: 100%;
+  position: relative;
+  background: $backgroundImage no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

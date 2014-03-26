@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Is blocked:</strong>
+  <%= @pallet.is_blocked %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @pallet.order_id %>
+</p>
+
+<%= link_to 'Edit', edit_pallet_path(@pallet) %> |
+<%= link_to 'Back', pallets_path %>

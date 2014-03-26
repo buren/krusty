@@ -1,0 +1,34 @@
+<%= form_for(@pallet) do |f| %>
+  <% if @pallet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pallet.errors.count, "error") %> prohibited this pallet from being saved:</h2>
+
+      <ul>
+      <% @pallet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :is_blocked %><br>
+    <%= f.check_box :is_blocked %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br>
+    <%= f.collection_select :order_id, Order.all, :id, :id %>
+  </div>
+  <div class="field">
+    <%= f.label :cookie %><br>
+    <%= f.collection_select :cookie_id, Cookie.all, :id, :name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.select :location, options_for_select(Pallet::LOCATIONS) %>
+  </div>
+  <br><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

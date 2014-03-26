@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-xs-4">
+    <h1>Search</h1>
+    <%= form_tag(pallets_path, method: "get", class: 'form-horizontal') do %>
+      <div class="field">
+        <%= label_tag :cookie %><br>
+        <%= select_tag :cookie_id, options_from_collection_for_select(Cookie.all, :id, :name ), include_blank: true %>
+      </div>
+      <div class="field">
+        <%= label_tag :from_date %><br>
+        <%= text_field_tag :from_date, nil, class: 'datepicker' %>
+      </div>
+      <div class="field">
+        <%= label_tag :to_date %><br>
+        <%= text_field_tag :to_date, nil, class: 'datepicker' %>
+      </div>
+      <br>
+      <div class="field">
+        <%= label_tag :blocked %><br>
+        <%= check_box_tag :blocked %>
+      </div>
+      <br><br>
+      <div class="action">
+        <%= submit_tag "Search", class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-8">
+    <h1>Listing pallets</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Delivered</th>
+          <th>Location</th>
+          <th>Blocked</th>
+          <th>Order</th>
+          <th>Cookie</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @results.each(as: :hash) do |pallet| %>
+          <tr>
+            <td><%= pallet['customer_name'] %> </td>
+            <td><%= pallet['delivered_date'] %> </td>
+            <td><%= pallet['location'].titleize %> </td>
+            <td><%= pallet['is_blocked'].nil? || pallet['is_blocked'].eql?(0) ? 'No' : 'Yes' %></td>
+            <td><%= pallet['order_id'] %></td>
+            <td><%= pallet['cookie_name'] %></td>
+            <td><%= link_to 'Edit', edit_pallet_path(pallet) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <br><br><br>
+  <div class="col-xs-4">
+    <% unless @blocked_pallets.empty? %>
+      <h1>Blocked Cookies</h1>
+      <% @blocked_pallets.each do |pallet| %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= pallet.cookie.name %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-xs-4">
+    <h1>Block pallets</h1>
+    <%= form_tag("/block_pallets", method: "post") do %>
+      <div class="field">
+        <%= label_tag :cookie %><br>
+        <%= select_tag :cookie_id, options_from_collection_for_select(Cookie.all, :id, :name ), include_blank: true %>
+      </div>
+      <div class="field">
+        <%= label_tag :from_date %><br>
+        <%= text_field_tag :from_date, nil, class: 'datepicker' %>
+      </div>
+      <div class="field">
+        <%= label_tag :to_date %><br>
+        <%= text_field_tag :to_date, nil, class: 'datepicker' %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= submit_tag "Block", class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-4">
+    <h1>Produce pallets</h1>
+    <%= form_tag("/produce_pallets", method: "post") do %>
+      <div class="field">
+        <%= label_tag :cookie %><br>
+        <%= select_tag :cookie_id, options_from_collection_for_select(Cookie.all, :id, :name ), include_blank: true %>
+      </div>
+      <div class="field">
+        <%= label_tag :quantity %><br>
+        <%= number_field_tag :quantity %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= submit_tag "Produce", class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
