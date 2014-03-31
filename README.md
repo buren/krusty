@@ -1,2 +1,2 @@
-Database EDA216 Project - Krusty Cookies
-https://krusty-cookies.herokuapp.com/
+## Database EDA216 Project - Krusty Cookies
+[krusty-cookies.herokuapp.com](https://krusty-cookies.herokuapp.com/)
