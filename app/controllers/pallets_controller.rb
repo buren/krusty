@@ -6,6 +6,7 @@ class PalletsController < ApplicationController
   # GET /pallets/1
   # GET /pallets/1.json
   def show
+    redirect_to pallets_path(pallet_id: @pallet['id'])
   end
 
   # GET /pallets/new
@@ -66,7 +67,7 @@ class PalletsController < ApplicationController
 
     only_blocked = params[:blocked].blank? || params[:blocked].to_i.eql?(0) ? false : true
     date_range = (from..to)
-    
+
     @results = Pallet.search_sql(
       date_range,
       only_blocked,

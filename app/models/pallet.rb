@@ -10,16 +10,13 @@ class Pallet < ActiveRecord::Base
   validates_presence_of :order, :cookie
   validates_inclusion_of :location, in: LOCATIONS, allow_nil: false
 
-  def self.find(id)
-    self.find_by_id(id)
-  end
-
   def self.find_by_id(id)
     sql_query = %{
       SELECT `pallets`.* FROM `pallets`
-          WHERE `pallets`.`id` = 1
+          WHERE `pallets`.`id` = #{id}
       LIMIT 1
     }
+    Pallet.connection.execute(sql_query).each(as: :hash).first
   end
 
   def self.search_sql date_range, only_blocked, cookie_id, pallet_id

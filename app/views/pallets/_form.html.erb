@@ -20,6 +20,10 @@
     <%= f.collection_select :order_id, Order.all, :id, :id %>
   </div>
   <div class="field">
+    <%= label_tag :delivered_date %><br>
+    <%= text_field_tag :delivered_date, nil, class: 'datepicker' %>
+  </div>
+  <div class="field">
     <%= f.label :cookie %><br>
     <%= f.collection_select :cookie_id, Cookie.all, :id, :name, include_blank: true %>
   </div>
