@@ -10,6 +10,22 @@ class Pallet < ActiveRecord::Base
   validates_presence_of :order, :cookie
   validates_inclusion_of :location, in: LOCATIONS, allow_nil: false
 
+  def self.find(id)
+    self.find_by_id(id)
+  end
+
+  def find_by id: id
+    self.find_by_id(id)
+  end
+
+  def self.find_by_id(id)
+    sql_query = %{
+      SELECT `pallets`.* FROM `pallets`
+          WHERE `pallets`.`id` = 1
+      LIMIT 1
+    }
+  end
+
   def self.search_sql date_range, only_blocked, cookie_id
     sql_query = %{
       SELECT `pallets`.*, `customers`.name as customer_name, `cookies`.name as cookie_name, `orders`.* FROM `pallets`
