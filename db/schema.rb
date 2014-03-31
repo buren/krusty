@@ -34,13 +34,6 @@ ActiveRecord::Schema.define(version: 20140325234022) do
     t.datetime "updated_at"
   end
 
-  create_table "ingredients", force: true do |t|
-    t.integer  "quantity"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "orders", force: true do |t|
     t.date     "requested_delivery_date"
     t.date     "delivered_date"
