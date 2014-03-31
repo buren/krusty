@@ -60,27 +60,26 @@
 <div class="row">
   <br><br><br>
   <div class="col-xs-4">
-    <% unless @blocked_pallets.empty? %>
+    <% if @blocked_pallets.size > 0 %>
       <h1>Blocked Cookies</h1>
-      <% @blocked_pallets.each do |pallet| %>
-        <table class="table table-striped">
-          <thead>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Cookie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @blocked_pallets.each(as: :hash) do |pallet| %>
             <tr>
-              <th>Cookie</th>
+              <td><%= pallet['name'] %></td>
             </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td><%= pallet.cookie.name %></td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
   </div>
   <div class="col-xs-4">
-    <h1>Block pallets</h1>
+    <h1>Block/Unblock pallets</h1>
     <%= form_tag("/block_pallets", method: "post") do %>
       <div class="field">
         <%= label_tag :cookie %><br>
@@ -94,9 +93,13 @@
         <%= label_tag :to_date %><br>
         <%= text_field_tag :to_date, nil, class: 'datepicker' %>
       </div>
+      <div class="field">
+        <%= label_tag :unblock %><br>
+        <%= check_box_tag :unblock %>
+      </div>
       <br>
       <div class="actions">
-        <%= submit_tag "Block", class: 'btn btn-danger' %>
+        <%= submit_tag "Update", class: 'btn btn-danger' %>
       </div>
     <% end %>
   </div>

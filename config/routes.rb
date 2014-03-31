@@ -14,5 +14,5 @@ CookieStore::Application.routes.draw do
   post "/block_pallets", to: 'pallets#block'
   post "/produce_pallets", to: 'pallets#produce'
 
-  root 'home#start'
+  root 'pallets#index'
 end

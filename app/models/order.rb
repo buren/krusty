@@ -6,9 +6,4 @@ class Order < ActiveRecord::Base
 
   validates_presence_of :requested_delivery_date, :customer
 
-
-  def blocked?
-    self.is_blocked
-  end
-
 end

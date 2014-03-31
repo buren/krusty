@@ -76,14 +76,16 @@ class PalletsController < ApplicationController
     to = Date.new(2100)   if to.blank?
 
     cookie = Cookie.find_by(id: params[:cookie_id]) # SQL
-    Pallet.block((from..to), cookie.id) unless cookie.blank?
+    block = params[:unblock].to_i.eql?(1) ? 0 : 1
 
-    flash[:notice] = "Blocked all pallets containing: #{cookie.name}"
+    Pallet.block!((from..to), cookie.id, block) unless cookie.blank?
+
+    flash[:notice] = "Updated block status for all pallets containing: #{cookie.name}"
     redirect_to pallets_url
   end
 
   def blocked_cookies
-    @blocked_pallets = Pallet.blocked_pallets.joins(:cookie) # SQL
+    @blocked_pallets = Pallet.blocked_pallets
   end
 
   def produce
@@ -98,7 +100,7 @@ class PalletsController < ApplicationController
       redirect_to pallets_url and return
     end
 
-    if Pallet.produce(quantity, cookie)
+    if Pallet.produce(quantity, cookie.id)
       flash[:success] = "Successfully added #{quantity} pallets of #{cookie.name} to production queue."
     else
       flash[:error] = "Error: Not enough substances, please restock."
