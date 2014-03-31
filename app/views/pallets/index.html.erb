@@ -3,6 +3,11 @@
     <h1>Search</h1>
     <%= form_tag(pallets_path, method: "get", class: 'form-horizontal') do %>
       <div class="field">
+        <div class="field">
+          <%= label_tag :pallet %><br>
+          <%= select_tag :pallet_id, options_from_collection_for_select(Pallet.all, :id, :id ), include_blank: true %>
+        </div>
+        <br>
         <%= label_tag :cookie %><br>
         <%= select_tag :cookie_id, options_from_collection_for_select(Cookie.all, :id, :name ), include_blank: true %>
       </div>
@@ -121,4 +126,3 @@
     <% end %>
   </div>
 </div>
-

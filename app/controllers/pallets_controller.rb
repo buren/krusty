@@ -65,8 +65,14 @@ class PalletsController < ApplicationController
     to = Date.new(2100)   if to.blank?
 
     only_blocked = params[:blocked].blank? || params[:blocked].to_i.eql?(0) ? false : true
-
-    @results = Pallet.search_sql((from..to), only_blocked, params[:cookie_id])
+    date_range = (from..to)
+    
+    @results = Pallet.search_sql(
+      date_range,
+      only_blocked,
+      params[:cookie_id],
+      params[:pallet_id]
+    )
   end
 
   def block

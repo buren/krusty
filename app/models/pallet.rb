@@ -14,10 +14,6 @@ class Pallet < ActiveRecord::Base
     self.find_by_id(id)
   end
 
-  def find_by id: id
-    self.find_by_id(id)
-  end
-
   def self.find_by_id(id)
     sql_query = %{
       SELECT `pallets`.* FROM `pallets`
@@ -26,7 +22,7 @@ class Pallet < ActiveRecord::Base
     }
   end
 
-  def self.search_sql date_range, only_blocked, cookie_id
+  def self.search_sql date_range, only_blocked, cookie_id, pallet_id
     sql_query = %{
       SELECT `pallets`.*, `customers`.name as customer_name, `cookies`.name as cookie_name, `orders`.* FROM `pallets`
         INNER JOIN `orders` ON `pallets`.order_id = `orders`.id
@@ -38,8 +34,9 @@ class Pallet < ActiveRecord::Base
             AND '#{date_range.last}'
           )
     }
-    sql_query << "AND `pallets`.`cookie_id` = #{cookie_id}" unless cookie_id.blank?
+    sql_query << " AND `pallets`.`cookie_id` = #{cookie_id}" unless cookie_id.blank?
     sql_query << " AND `pallets`.`is_blocked` = 1" if only_blocked
+    sql_query << " AND `pallets`.`id` = #{pallet_id} LIMIT 1" unless pallet_id.blank?
     Pallet.connection.execute(sql_query)
   end
 
